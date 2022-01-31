@@ -1,9 +1,11 @@
 package com.example.finalproject.Entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User{
     enum UserType{
         BUYER,
@@ -21,20 +23,29 @@ public class User{
     @Column(name = "email")
     private String email;
     @Column(name = "type")
+    @Enumerated(EnumType.STRING)
     private UserType userType;
+
+    @OneToMany(cascade = {CascadeType.DETACH,CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},mappedBy = "seller")
+    private List<Product> products;
+
+    @OneToMany(cascade = {CascadeType.DETACH,CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},mappedBy = "user")
+    private List<Order> orders;
+
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "user")
+    private Cart cart;
 
     public User(){
         // other values will be taken as random value, need to write code / method for that
-        this.userType = UserType.BUYER;
+        //this.userType = UserType.BUYER;
     }
 
     //for practise only
-    public User(int i){
-        id = i;
-    }
+//    public User(int i){
+//        id = i;
+//    }
 
-    public User(int id, String name, String passWord, String address, String email, UserType userType) {
-        this.id = id;
+    public User(String name, String passWord, String address, String email, UserType userType) {
         this.name = name;
         this.passWord = passWord;
         this.address = address;
@@ -88,6 +99,30 @@ public class User{
 
     public void setUserType(UserType userType) {
         this.userType = userType;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 
     @Override
