@@ -19,24 +19,33 @@ public class UserController {
         this.userService = userService;
     }
     
-    @GetMapping("")
+    @GetMapping()
     public List<User> getAllUsers(){
         return userService.getAllUser();
     }
 
     @GetMapping("/{userId}")
-    public User getUser(@PathVariable String userId){
-        return this.userService.getUser(Integer.parseInt(userId));
+    public ResponseEntity<User> getUser(@PathVariable String userId){
+//        User user = this.userService.getUser(Integer.parseInt(userId));
+        return new ResponseEntity<>(this.userService.getUser(Integer.parseInt(userId)),
+                HttpStatus.ACCEPTED);
     }
 
-    @PostMapping(value = "", consumes = "application/json")
+    @PostMapping(consumes = "application/json")
     public ResponseEntity<User> addUser(@RequestBody User user){
         return new ResponseEntity<>(this.userService.createUser(user), HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/{userId}", consumes = "application/json")
-    public User updateUser(@RequestBody User user, @PathVariable String userId){
-        return this.userService.updateUser(Integer.parseInt(userId), user);
+    public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable String userId){
+        return new ResponseEntity<>(this.userService.updateUser(Integer.parseInt(userId), user)
+                , HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping(value = "/{userId}")
+    public ResponseEntity<User> deleteUser(@PathVariable String userId){
+        return new ResponseEntity<>(this.userService.deleteUser(Integer.parseInt(userId)),
+                HttpStatus.ACCEPTED);
     }
 
 }

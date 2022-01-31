@@ -39,13 +39,8 @@ public class User{
         // other values will be taken as random value, need to write code / method for that
         //this.userType = UserType.BUYER;
     }
-
-    //for practise only
-//    public User(int i){
-//        id = i;
-//    }
-
-    public User(String name, String passWord, String address, String email, UserType userType) {
+    public User(int id, String name, String passWord, String email, String address, UserType userType) {
+        this.id = id;
         this.name = name;
         this.passWord = passWord;
         this.address = address;

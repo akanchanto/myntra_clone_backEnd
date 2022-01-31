@@ -11,7 +11,6 @@ import java.util.List;
 
 @Service
 public class UserServiceImplement implements UserService{
-
     private UserRepository userRepository;
 
     @Autowired
@@ -26,7 +25,8 @@ public class UserServiceImplement implements UserService{
 
     @Override
     public User getUser(int id) {
-        return userRepository.getById(id);
+        User user  = userRepository.findById(id).orElse(null);
+        return user;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class UserServiceImplement implements UserService{
 
     @Override
     public User deleteUser(int id) {
-        User user = userRepository.getById(id);
+        User user = userRepository.findById(id).get();
         userRepository.delete(user);
         return user;
     }
