@@ -2,6 +2,7 @@ package com.example.finalproject.Services;
 
 import com.example.finalproject.Entities.User;
 import com.example.finalproject.Repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,9 +11,9 @@ import java.util.List;
 
 @Service
 public class UserServiceImplement implements UserService{
-//    List<User> users;
     private UserRepository userRepository;
 
+    @Autowired
     public UserServiceImplement(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -24,7 +25,8 @@ public class UserServiceImplement implements UserService{
 
     @Override
     public User getUser(int id) {
-        return userRepository.getById(id);
+        User user  = userRepository.findById(id).orElse(null);
+        return user;
     }
 
     @Override
@@ -37,7 +39,7 @@ public class UserServiceImplement implements UserService{
 
     @Override
     public User deleteUser(int id) {
-        User user = userRepository.getById(id);
+        User user = userRepository.findById(id).get();
         userRepository.delete(user);
         return user;
     }
