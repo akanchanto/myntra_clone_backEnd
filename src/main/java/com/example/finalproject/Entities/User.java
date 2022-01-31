@@ -1,20 +1,36 @@
 package com.example.finalproject.Entities;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User{
     enum UserType{
         BUYER,
         SELLER
     }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "password")
     private String passWord;
+    @Column(name = "address")
     private String address;
+    @Column(name = "email")
     private String email;
+    @Column(name = "type")
     private UserType userType;
 
     public User(){
         // other values will be taken as random value, need to write code / method for that
         this.userType = UserType.BUYER;
+    }
+
+    //for practise only
+    public User(int i){
+        id = i;
     }
 
     public User(int id, String name, String passWord, String address, String email, UserType userType) {
@@ -72,5 +88,10 @@ public class User{
 
     public void setUserType(UserType userType) {
         this.userType = userType;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
     }
 }
