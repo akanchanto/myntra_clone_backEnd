@@ -2,6 +2,8 @@ package com.example.finalproject.Entities;
 
 import javax.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name="item")
 public class Item {

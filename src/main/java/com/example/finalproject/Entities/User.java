@@ -1,6 +1,8 @@
 package com.example.finalproject.Entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -24,11 +26,19 @@ public class User{
     @Enumerated(EnumType.STRING)
     private UserType userType;
 
+    @OneToMany(cascade = {CascadeType.DETACH,CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},mappedBy = "seller")
+    private List<Product> products;
+
+    @OneToMany(cascade = {CascadeType.DETACH,CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},mappedBy = "user")
+    private List<Order> orders;
+
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "user")
+    private Cart cart;
+
     public User(){
         // other values will be taken as random value, need to write code / method for that
-        this.userType = UserType.BUYER;
+        //this.userType = UserType.BUYER;
     }
-
     public User(int id, String name, String passWord, String email, String address, UserType userType) {
         this.id = id;
         this.name = name;
@@ -86,4 +96,32 @@ public class User{
         this.userType = userType;
     }
 
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
 }

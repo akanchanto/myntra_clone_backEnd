@@ -12,15 +12,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
-    UserService userService;
+    private UserService userService;
 
+    @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
     
     @GetMapping()
     public List<User> getAllUsers(){
-        return this.userService.getAllUser();
+        return userService.getAllUser();
     }
 
     @GetMapping("/{userId}")
