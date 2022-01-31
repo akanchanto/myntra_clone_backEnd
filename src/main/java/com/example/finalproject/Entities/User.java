@@ -3,7 +3,7 @@ package com.example.finalproject.Entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User{
     enum UserType{
         BUYER,
@@ -21,6 +21,7 @@ public class User{
     @Column(name = "email")
     private String email;
     @Column(name = "type")
+    @Enumerated(EnumType.STRING)
     private UserType userType;
 
     public User(){
@@ -28,12 +29,7 @@ public class User{
         this.userType = UserType.BUYER;
     }
 
-    //for practise only
-    public User(int i){
-        id = i;
-    }
-
-    public User(int id, String name, String passWord, String address, String email, UserType userType) {
+    public User(int id, String name, String passWord, String email, String address, UserType userType) {
         this.id = id;
         this.name = name;
         this.passWord = passWord;
@@ -90,8 +86,4 @@ public class User{
         this.userType = userType;
     }
 
-    @Override
-    public int hashCode() {
-        return id;
-    }
 }
