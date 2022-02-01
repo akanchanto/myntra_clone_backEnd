@@ -24,8 +24,5 @@ public class ProductController {
         return new ResponseEntity<>(productService.getAllProduct(), HttpStatus.ACCEPTED);
     }
 
-    @PostMapping( value = "/{id}", consumes = "application/json")
-    public ResponseEntity<Product> createProduct(@PathVariable String id, @RequestBody Product product){
-        return new ResponseEntity<>(productService.createProduct(Integer.parseInt(id), product), HttpStatus.CREATED);
-    }
+
 }

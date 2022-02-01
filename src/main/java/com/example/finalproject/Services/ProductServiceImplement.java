@@ -7,6 +7,7 @@ import com.example.finalproject.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ProductServiceImplement implements ProductService{
     ProductRepository productRepository;
@@ -20,22 +21,23 @@ public class ProductServiceImplement implements ProductService{
 
     @Override
     public List<Product> getAllProduct() {
-        return null;
+        return productRepository.findAll();
     }
 
     @Override
     public Product getProduct(int id) {
-        return null;
+        Optional<Product> byId = productRepository.findById(id);
+        return byId.get();
     }
 
     @Override
     public Product updateProduct(int id, Product product) {
-        return null;
+        Product updatedProduct  = productRepository.save(product);
+        return updatedProduct;
     }
 
     @Override
-    public Product deleteProduct(int id) {
-        return null;
+    public void deleteProduct(int id) {
     }
 
     @Override
