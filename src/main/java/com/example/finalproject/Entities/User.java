@@ -1,16 +1,20 @@
 package com.example.finalproject.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "user")
-public class User{
-    enum UserType{
+public class User {
+    enum UserType {
         BUYER,
         SELLER
     }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -26,21 +30,24 @@ public class User{
     @Enumerated(EnumType.STRING)
     private UserType userType;
 
-    @OneToMany(cascade = {CascadeType.DETACH,CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},mappedBy = "seller")
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "seller")
+    @JsonIgnoreProperties("seller")
     private List<Product> products;
 
-    @OneToMany(cascade = {CascadeType.DETACH,CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},mappedBy = "user")
+    @OneToMany(mappedBy = "user")
     private List<Order> orders;
 
-    @OneToOne(cascade = CascadeType.ALL,mappedBy = "user")
+
+    @OneToOne(mappedBy = "user")
     private Cart cart;
 
-    public User(){
+    public User() {
         // other values will be taken as random value, need to write code / method for that
         //this.userType = UserType.BUYER;
     }
-    public User(int id, String name, String passWord, String email, String address, UserType userType) {
-        this.id = id;
+
+    public User(String name, String passWord, String email, String address, UserType userType) {
         this.name = name;
         this.passWord = passWord;
         this.address = address;
@@ -121,7 +128,14 @@ public class User{
     }
 
     @Override
-    public int hashCode() {
-        return id;
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", passWord='" + passWord + '\'' +
+                ", address='" + address + '\'' +
+                ", email='" + email + '\'' +
+                ", userType=" + userType +
+                '}';
     }
 }

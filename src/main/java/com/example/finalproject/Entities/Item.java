@@ -1,5 +1,7 @@
 package com.example.finalproject.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 import java.util.List;
@@ -11,18 +13,21 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="Column")
+    @Column(name="quantity")
     private int quantity;
 
-    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+
+    @ManyToOne
     @JoinColumn(name="cart_id")
     private Cart cart;
 
-    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+
+    @ManyToOne
     @JoinColumn(name="order_detail_id")
     private Order order;
 
-    @OneToOne(cascade = CascadeType.ALL)
+
+    @OneToOne
     @JoinColumn(name="extra_id")
     private Extra extra;
 
@@ -72,5 +77,13 @@ public class Item {
 
     public void setExtra(Extra extra) {
         this.extra = extra;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", quantity=" + quantity +
+                '}';
     }
 }

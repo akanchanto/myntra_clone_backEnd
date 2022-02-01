@@ -1,5 +1,8 @@
 package com.example.finalproject.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -10,11 +13,13 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+
+    @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
 
-    @OneToMany(cascade = {CascadeType.DETACH,CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},mappedBy = "order")
+
+    @OneToMany(mappedBy = "order")
     private List<Item> items;
 
     public Order() {
@@ -46,5 +51,12 @@ public class Order {
 
     public void setItems(List<Item> items) {
         this.items = items;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                '}';
     }
 }

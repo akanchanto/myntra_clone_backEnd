@@ -3,12 +3,14 @@ package com.example.finalproject.Services;
 import com.example.finalproject.Entities.User;
 import com.example.finalproject.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+@Lazy
 @Service
 public class UserServiceImplement implements UserService{
     private UserRepository userRepository;
