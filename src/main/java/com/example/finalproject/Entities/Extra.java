@@ -1,5 +1,7 @@
 package com.example.finalproject.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,13 +18,14 @@ public class Extra {
     @Enumerated(EnumType.STRING)
     private Size size;
 
-    @Column(name="column")
+    @Column(name="quantity")
     private int quantity;
 
     @Column(name="price")
     private double price;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+
+    @ManyToOne
     @JoinColumn(name="product_id")
     private Product product;
 
@@ -74,5 +77,15 @@ public class Extra {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    @Override
+    public String toString() {
+        return "Extra{" +
+                "id=" + id +
+                ", size=" + size +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                '}';
     }
 }

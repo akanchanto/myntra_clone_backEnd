@@ -1,5 +1,9 @@
 package com.example.finalproject.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -26,11 +30,13 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="seller_id")
+    @JsonIgnoreProperties("products")
     private User seller;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "product")
+
+    @OneToMany(mappedBy = "product")
     private List<Extra> extras;
 
     public Product() {
@@ -89,5 +95,15 @@ public class Product {
 
     public void setExtras(List<Extra> extras) {
         this.extras = extras;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", brand='" + brand + '\'' +
+                ", category=" + category +
+                '}';
     }
 }
