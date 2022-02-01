@@ -1,9 +1,12 @@
 package com.example.finalproject.Entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
+//Product Attributes
 @Entity
 @Table(name="extra")
 public class Extra {
@@ -27,6 +30,7 @@ public class Extra {
 
     @ManyToOne
     @JoinColumn(name="product_id")
+    @JsonIgnore
     private Product product;
 
     public Extra() {

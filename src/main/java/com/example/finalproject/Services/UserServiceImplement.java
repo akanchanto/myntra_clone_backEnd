@@ -1,9 +1,11 @@
 package com.example.finalproject.Services;
 
 import com.example.finalproject.Entities.User;
+import com.example.finalproject.Exceptions.ResourceNotFoundException;
 import com.example.finalproject.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

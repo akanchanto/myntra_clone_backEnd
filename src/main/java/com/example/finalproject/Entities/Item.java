@@ -22,11 +22,6 @@ public class Item {
     private Cart cart;
 
 
-    @ManyToOne
-    @JoinColumn(name="order_detail_id")
-    private Order order;
-
-
     @OneToOne
     @JoinColumn(name="extra_id")
     private Extra extra;
@@ -61,14 +56,6 @@ public class Item {
 
     public void setCart(Cart cart) {
         this.cart = cart;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
     }
 
     public Extra getExtra() {

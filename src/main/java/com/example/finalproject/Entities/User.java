@@ -31,12 +31,9 @@ public class User {
     private UserType userType;
 
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "seller")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "seller")
     @JsonIgnoreProperties("seller")
     private List<Product> products;
-
-    @OneToMany(mappedBy = "user")
-    private List<Order> orders;
 
 
     @OneToOne(mappedBy = "user")
@@ -117,14 +114,6 @@ public class User {
 
     public void setCart(Cart cart) {
         this.cart = cart;
-    }
-
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
     }
 
     @Override

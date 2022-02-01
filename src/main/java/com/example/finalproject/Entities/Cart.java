@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="cart")
+@Table(name="cart") // this is basically the order
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -14,6 +14,7 @@ import java.util.List;
 public class ProductController {
     private ProductService productService;
 
+    @Autowired
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
@@ -23,8 +24,8 @@ public class ProductController {
         return new ResponseEntity<>(productService.getAllProduct(), HttpStatus.ACCEPTED);
     }
 
-    @PostMapping(consumes = "application/json")
-    public ResponseEntity<Product> createProduct(@RequestBody Product product){
-        return new ResponseEntity<>(productService.createProduct(product), HttpStatus.CREATED);
+    @PostMapping( value = "/{id}", consumes = "application/json")
+    public ResponseEntity<Product> createProduct(@PathVariable String id, @RequestBody Product product){
+        return new ResponseEntity<>(productService.createProduct(Integer.parseInt(id), product), HttpStatus.CREATED);
     }
 }

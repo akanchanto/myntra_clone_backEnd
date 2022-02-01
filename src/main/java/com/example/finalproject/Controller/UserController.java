@@ -26,9 +26,10 @@ public class UserController {
 
     @GetMapping("/{userId}")
     public ResponseEntity<User> getUser(@PathVariable String userId){
-//        User user = this.userService.getUser(Integer.parseInt(userId));
-        return new ResponseEntity<>(this.userService.getUser(Integer.parseInt(userId)),
-                HttpStatus.ACCEPTED);
+        User user = this.userService.getUser(Integer.parseInt(userId));
+        return user == null ?
+                new ResponseEntity<>(HttpStatus.NOT_FOUND)
+                : new ResponseEntity<>(user, HttpStatus.ACCEPTED);
     }
 
     @PostMapping(consumes = "application/json")
