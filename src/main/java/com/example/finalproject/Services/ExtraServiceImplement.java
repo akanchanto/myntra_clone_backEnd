@@ -6,9 +6,11 @@ import com.example.finalproject.Repositories.ExtraRepository;
 import com.example.finalproject.Repositories.ProductRepository;
 import com.example.finalproject.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ExtraServiceImplement implements ExtraService{
     ProductRepository productRepository;
     ExtraRepository extraRepository;
