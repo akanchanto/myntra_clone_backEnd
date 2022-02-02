@@ -18,6 +18,7 @@ public class Product {
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private int id;
 
     @Column(name="name")
@@ -30,7 +31,7 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="seller_id")
     @JsonIgnoreProperties("products")
     private User seller;

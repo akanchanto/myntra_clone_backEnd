@@ -2,10 +2,12 @@ package com.example.finalproject.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Entity
 @Table(name = "user")
@@ -17,6 +19,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private int id;
     @Column(name = "name")
     private String name;
@@ -36,7 +39,8 @@ public class User {
     private List<Product> products;
 
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(fetch = FetchType.EAGER,mappedBy = "user")
+    @JsonIgnoreProperties("user")
     private Cart cart;
 
     public User() {
