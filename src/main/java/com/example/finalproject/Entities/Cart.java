@@ -1,6 +1,7 @@
 package com.example.finalproject.Entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -11,15 +12,16 @@ import java.util.List;
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private int id;
 
 
-    @OneToOne
-    @JoinColumn(name="user_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id",referencedColumnName = "id")
     private User user;
 
-
     @OneToMany(mappedBy = "cart")
+    @JsonIgnoreProperties("cart")
     private List<Item> items;
 
     public Cart() {

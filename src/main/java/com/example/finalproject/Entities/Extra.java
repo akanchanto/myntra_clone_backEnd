@@ -15,6 +15,7 @@ public class Extra {
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private int id;
 
     @Column(name="size")
@@ -28,7 +29,7 @@ public class Extra {
     private double price;
 
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="product_id")
     @JsonIgnore
     private Product product;
