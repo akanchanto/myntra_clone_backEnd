@@ -16,6 +16,7 @@ public class ExtraServiceImplement implements ExtraService{
     ExtraRepository extraRepository;
     UserRepository userRepository;
 
+    //AutoWired
     @Autowired
     public ExtraServiceImplement(ProductRepository productRepository, ExtraRepository extraRepository, UserRepository userRepository) {
         this.productRepository = productRepository;
