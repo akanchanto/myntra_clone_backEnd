@@ -20,22 +20,28 @@ public class ProductServiceImplement implements ProductService{
 
     @Override
     public List<Product> getAllProduct() {
-        return null;
+        return productRepository.findAll();
     }
 
     @Override
     public Product getProduct(int id) {
-        return null;
+        return productRepository.findById(id).orElse(null);
     }
 
     @Override
     public Product updateProduct(int id, Product product) {
-        return null;
+        Product p = productRepository.findById(id).get();
+        product.setId(p.getId()); //setting the id
+        productRepository.save(product);
+        return product;
     }
+
 
     @Override
     public Product deleteProduct(int id) {
-        return null;
+        Product product = productRepository.findById(id).get();
+        productRepository.delete(product);
+        return product;
     }
 
     @Override

@@ -36,7 +36,8 @@ public class Product {
     private User seller;
 
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "product")
+    @JsonIgnoreProperties("product")
     private List<Extra> extras;
 
     public Product() {
